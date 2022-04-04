@@ -26,6 +26,13 @@ Basic structure for starting a Flask project with Jinja templates
 7. Continue working with the project as you normally would.
 
 ---
+## What I learned:
+1. Creating and collecting data from web forms
+
+2. Manipulating data from web forms
+
+---
+
 ## To-do: 
 
 - [x] ~~Get Flask running on local computer~~
