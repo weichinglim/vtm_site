@@ -1,3 +1,94 @@
+/* CSS Reset */
+html {
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+    line-height: 1;
+}
+
 body{
-    background-color: azure;
+    background-color: #FDFAF2;
+    margin-top: 0px;
+}
+
+header{
+    background-color: #2F3140;
+    text-align: left;
+    margin:0;
+    padding: 10px;
+    padding-left: 0;
+}
+
+footer{
+    background-color: #2F3140;
+    color: #FDFAF2;
+    text-align: left;
+}
+
+ul {
+    background-color: #2F3140;
+    text-align: left;
+    list-style: none;
+    margin-top: 0px;
+    margin-bottom: 10px;
+    padding-top: 15px;
+    padding-bottom: 20px;
+    padding-left: 0;
+}
+
+li {
+    display: inline;
+    font-size: 1.5rem;
+    margin: 15px;
+  }
+
+h1 {
+    color: #FDFAF2;
+    font-style: bold;
+    font-weight: 550;
+    font-size: 3rem;
+    text-align: left;
+    margin: 15px;   
+}
+
+h2 {
+    color: #252529;
+    font-style: bold;
+    text-align: left;
+    margin: 15px;
+}
+
+h3 {
+    color: #252529;
+    font-style: bold;
+    text-align: left;
+    margin: 15px;
+}
+
+p {
+    text-align: left;
+    margin: 15px;
+}
+
+img {
+    margin: 15px;
+}
+
+/* unvisited link*/
+a:link{
+    color: #FDFAF2;
+    text-decoration: none;
+}
+
+/* visited link*/
+a:visited{
+    color: #FDFAF2;
+    text-decoration: none;
+}
+
+/* mouse over link*/
+a:hover{
+    color: #FDFAF2;
+    background-color: #000000;
+    text-decoration: none;
 }

@@ -23,9 +23,9 @@
     </form>
     <br />
     {% if price %}
-    <p>The estimate for painting is ${{'%0.2f'|format(price|float)}}</p> 
+    <h3>The estimate for painting is ${{'%0.2f'|format(price|float)}}</h3>
+    </br>
+    </br>
     {% endif %}
-
-    <p>{{ display }}</p>
 
 {% endblock %}
