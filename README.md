@@ -30,5 +30,5 @@ Basic structure for starting a Flask project with Jinja templates
 
 - [x] ~~Get Flask running on local computer~~
 - [x] ~~Add web form for users~~
-- [x] Collect web form data and manipulate
+- [x] ~~Collect web form data and manipulate~~
 - [ ] Update CSS stylesheet - change background color size
