@@ -4,4 +4,28 @@
 
     <h2> VTM Estimator </h2>
 
+    <hr />
+    <br />
+
+    <form action="/estimate" method="POST">
+
+        <label for="radius">Tank radius:</label>
+        <input type="text" id="radius" name="radius" placeholder="height in inches" autofocus required/>
+        <br />
+        <br />
+        <label for="height">Tank height:</label>
+        <input type="text" id="height" name="height" placeholder="height in inches" />
+        <br />
+        <br />
+        <input type="submit" id="submit" value="Submit" />
+        <input type="reset" value="Clear" />
+
+    </form>
+    <br />
+    {% if price %}
+    <p>The estimate for painting is ${{'%0.2f'|format(price|float)}}</p> 
+    {% endif %}
+
+    <p>{{ display }}</p>
+
 {% endblock %}
