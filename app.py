@@ -11,6 +11,37 @@ def index():
 def about():
     return render_template('about.html', pageTitle='Vertical Tank Maintenance')
 
+def calculate_area(tankHeight, tankRadius):
+    #Area of tank top
+    pi = 3.14
+    area_top = pi*tankRadius*tankRadius
+
+    #Area of tank sides
+    area_sides = 2*(pi*(tankRadius*tankHeight))
+
+    #Calculate total area
+    total_area = area_top+area_sides
+
+    #Convert total area in inches to square feet
+    total_area_sqft = total_area/144
+    return total_area_sqft
+
+def calculate_material_cost(total_area_sqft):
+    #Calculate material cost
+    materialCost = 25.00 #per square foot
+    total_material_cost = total_area_sqft*materialCost
+    return total_material_cost
+
+def calculate_labor_cost(total_area_sqft):
+    #Calculate labor cost
+    laborCost = 15.00 #per square foot
+    total_labor_cost = total_area_sqft*laborCost
+    return total_labor_cost
+
+def calculate_price(total_material_cost, total_labor_cost):
+    #Total price
+    return total_material_cost+total_labor_cost
+
 @app.route('/estimate', methods=['POST', 'GET'])
 def estimate():
     price=''
@@ -19,32 +50,14 @@ def estimate():
         tankHeight = float(form['height'])
         tankRadius = float(form['radius'])
 
-        #Area of tank top
-        pi = 3.14
-        area_top = 2*(pi*tankRadius*tankRadius)
+        total_area_sqft = calculate_area(tankHeight,tankRadius)
+        total_material_cost = calculate_material_cost(total_area_sqft)
+        total_labor_cost = calculate_labor_cost(total_area_sqft)
 
-        #Area of tank sides
-        area_sides = 2*(pi*(tankRadius*tankHeight))
+        if 'price_estimate' in request.form:
+            price_est = calculate_price(total_material_cost, total_labor_cost)
 
-        #Calculate total area
-        total_area = area_top+area_sides
-
-        #Convert total area in inches to square feet
-        total_sf = total_area/144
-
-        #Calculate material cost
-        materialCost = 25.00 #per square foot
-        total_mc = total_sf*materialCost
-
-        #Calculate labor cost
-        laborCost = 15.00 #per square foot
-        total_lc = total_sf*laborCost
-
-        #Total price
-        total_ce = total_mc+total_lc #total_ce = total cost estimate
-
-        #return redirect(url_for('index'))
-        return render_template('estimate.html', price=total_ce)
+        return render_template('estimate.html', price=price_est) #price=jinja , price_est=python
     return render_template('estimate.html')
 
 if __name__ == '__main__':
