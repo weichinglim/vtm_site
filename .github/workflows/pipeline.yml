@@ -19,16 +19,16 @@ jobs:
       - name: Set up Python version
         uses: actions/setup-python@v2
         with:
-          python-version: '3.9'
+          python-version: 3.9
 
       #- name: Create and start virtual environment
         #run: |
           #python -m venv venv
           #source venv/bin/activate
       
-      - name: Install project dependencies 
+      - name: Install project dependencies # installs pip and upgrades to the latest version
         run: |
-          python3 -m pip3 install --upgrade pip3 # installs pip and upgrades to the latest version
+          python3 -m pip3 install --upgrade pip3 
           pip3 install -r requirements.txt;
 
       - name: Install pytest and dependencies # Install without putting in requirements.txt & will only be used in pipeline
@@ -53,19 +53,19 @@ jobs:
       - name: Set up Python version
         uses: actions/setup-python@v2
         with:
-          python-version: '3.9'
+          python-version: 3.9
 
       - name: Install project dependencies
         run: |
           python3 -m pip3 install --upgrade pip3
           pip3 install -r requirements.txt;
 
-      # package application into BUILD directory
+      # package application into BUILD directory # copy the static directory and contents  # copy the templates directory and contents
       - name: Create BUILD directory and copy necessary application files #only NEEDED files - no tests/documentation/readme
         run: |
           mkdir BUILD
-          cp -r static BUILD/static  # copy the static directory and contents
-          cp -r templates BUILD/templates  # copy the templates directory and contents
+          cp -r static BUILD/static  
+          cp -r templates BUILD/templates  
           cp -r app.py BUILD/app.py
           cp -r requirements.txt BUILD/requirements.txt
 
