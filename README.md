@@ -1,4 +1,6 @@
 # Flask Template
+[![test-package-deploy](https://github.com/weichinglim/vtm_site/actions/workflows/pipeline.yml/badge.svg?branch=main&event=push)](https://github.com/weichinglim/vtm_site/actions/workflows/pipeline.yml)
+
 ![Flask](https://img.shields.io/badge/-Flask-black?logo=flask)
 ![Azure](https://img.shields.io/badge/-Azure-blue?logo=microsoftazure)
 
