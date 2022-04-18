@@ -2,47 +2,87 @@
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 # More info on Python, GitHub Actions, and Azure App Service: https://aka.ms/python-webapps-actions
 
-name: Build and deploy Python app to Azure Web App - vtm-price-estimate
+name: test-package-deploy
 
 on:
   push:
-    branches:
-      - main
-  workflow_dispatch:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
-  build:
+  test:
+  name: "test"
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      # Checkout source code
+      - name: Checkout
+      - uses: actions/checkout@v2 #checks out code committed to main
 
       - name: Set up Python version
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v2
         with:
           python-version: '3.9'
 
-      - name: Create and start virtual environment
+      #- name: Create and start virtual environment
+        #run: |
+          #python -m venv venv
+          #source venv/bin/activate
+      
+      - name: Install project dependencies 
         run: |
-          python -m venv venv
-          source venv/bin/activate
-      
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-        
-      # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
-      
-      - name: Upload artifact for deployment jobs
+          python3 -m pip3 install --upgrade pip3 # installs pip and upgrades to the latest version
+          pip3 install -r requirements.txt;
+
+      - name: Install pytest and dependencies # Install without putting in requirements.txt & will only be used in pipeline
+        run: |
+          pip3 install pytest
+
+      # Run tests
+      - name: Run tests with pytest
+        run: |
+          python3 -m pytest
+
+    package:
+    name: "package"
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      # Checkout source code
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up Python version
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Install project dependencies
+        run: |
+          python3 -m pip3 install --upgrade pip3
+          pip3 install -r requirements.txt;
+
+      # package application into BUILD directory
+      - name: Create BUILD directory and copy necessary application files #only NEEDED files - no tests/documentation/readme
+        run: |
+          mkdir BUILD
+          cp -r static BUILD/static  # copy the static directory and contents
+          cp -r templates BUILD/templates  # copy the templates directory and contents
+          cp -r app.py BUILD/app.py
+          cp -r requirements.txt BUILD/requirements.txt
+
+      - name: Upload artifact for deployment jobs #like ZIP file
         uses: actions/upload-artifact@v2
         with:
           name: python-app
           path: |
-            . 
-            !venv/
+            ./BUILD
 
   deploy:
     runs-on: ubuntu-latest
-    needs: build
+    needs: package
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
