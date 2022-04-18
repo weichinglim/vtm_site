@@ -1,5 +1,5 @@
 # Flask Template
-[![test-package-deploy](https://github.com/weichinglim/vtm_site/workflows/test-package-deploy/badge.svg?branch=main&event=push)](https://github.com/weichinglim/vtm_site/actions/workflows/test-package-deploy)
+[![test-package-deploy](https://github.com/weichinglim/vtm_site/workflows/test-package-deploy/badge.svg?branch=main&event=push)](https://github.com/weichinglim/vtm_site/actions/workflows/pipeline.yaml)
 
 ![Flask](https://img.shields.io/badge/-Flask-black?logo=flask)
 ![Azure](https://img.shields.io/badge/-Azure-blue?logo=microsoftazure)
