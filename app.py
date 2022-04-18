@@ -9,7 +9,7 @@ def index():
 
 @app.route('/about')
 def about():
-    return render_template('about.html', pageTitle='Vertical Tank Maintenance')
+    return render_template('about.html', pageTitle='About VTM')
 
 def calculate_area(tankHeight, tankRadius):
     #Area of tank top
@@ -57,8 +57,8 @@ def estimate():
         if 'price_estimate' in request.form:
             price_est = calculate_price(total_material_cost, total_labor_cost)
 
-        return render_template('estimate.html', price=price_est) #price=jinja , price_est=python
-    return render_template('estimate.html')
+        return render_template('estimate.html', pageTitle='VTM Estimator', price=price_est) #price=jinja , price_est=python
+    return render_template('estimate.html', pageTitle='VTM Estimator')
 
 if __name__ == '__main__':
     app.run(debug=False)
