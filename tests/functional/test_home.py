@@ -66,5 +66,3 @@ def test_price_estimate_functionality(app, client):
         res = test_client.post('/estimate', data=calc_price)
         assert res.status_code == 200 
         assert b"$141,300.00" in res.data
-
-
