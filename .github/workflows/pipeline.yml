@@ -28,17 +28,17 @@ jobs:
       
       - name: Install project dependencies # installs pip and upgrades to the latest version
         run: |
-          python3 -m pip3 install --upgrade pip3 
-          pip3 install -r requirements.txt;
+          python3 -m pip install --upgrade pip 
+          pip install -r requirements.txt;
 
       - name: Install pytest and dependencies # Install without putting in requirements.txt & will only be used in pipeline
         run: |
-          pip3 install pytest
+          pip install pytest
 
       # Run tests
       - name: Run tests with pytest
         run: |
-          python3 -m pytest
+          python -m pytest
 
   package:
     name: "package"
@@ -57,8 +57,8 @@ jobs:
 
       - name: Install project dependencies
         run: |
-          python3 -m pip3 install --upgrade pip3
-          pip3 install -r requirements.txt;
+          python3 -m pip install --upgrade pip
+          pip install -r requirements.txt;
 
       # package application into BUILD directory # copy the static directory and contents  # copy the templates directory and contents
       - name: Create BUILD directory and copy necessary application files #only NEEDED files - no tests/documentation/readme
